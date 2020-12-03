@@ -1,9 +1,13 @@
 <div class="container p-4">
     <div class="row">
-        {{#each links}}
-        
         <div class="col-md-4">
-            <div class="card text-center">
+            <a href="/links/add" class="btn btn-primary">¡Crear link!</a>
+        </div>
+    </div>
+    <div class="row my-3">
+        {{#each links}}
+        <div class="col-md-4">
+            <div class="card text-center my-2">
                 <div class="card-body">
                     <a href="{{ url }}">
                         <h3 class="card-title text-uppercase">
@@ -12,11 +16,20 @@
                     </a>
                     <p class="m-2">{{ description }}</p>
                     <p>{{timeago created_at}}</p>
-                    <a href="" class="btn btn-danger">DELETE</a>
-                    <a href="" class="btn btn-secondary">EDIT</a>
+                    <a href="/links/delete/{{ id }}" class="btn btn-danger">DELETE</a>
+                    <a href="/links/edit/{{ id }}" class="btn btn-secondary">EDIT</a>
                 </div>    
             </div>
         </div>
+        {{else}}
+            <div class="col-md-6 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <p>No hay enlaces creados</p>
+                        <a href="/links/add" class="btn btn-primary">¡Crear link!</a>
+                    </div>
+                </div>
+            </div>
         {{/each}}
     </div>
 </div>
