@@ -20,13 +20,14 @@ router.post('/add', async (req, res) => {
     };
 
     await db.query('INSERT INTO links SET ?', [newLink]);
-    //res.send('recibido');
+    req.flash('success', 'Enlace guardado exitosamente');
     res.redirect('/links');
 });
 
 router.get('/delete/:id', async (req, res) => {
     const { id } = req.params;
     await db.query('DELETE FROM links WHERE ID = ?', [ id ]);
+    req.flash('success', 'Enlace eliminado exitosamente');
     res.redirect('/links');
 });
 
@@ -45,6 +46,7 @@ router.post('/edit/:id', async (req, res) => {
     };
 
     await db.query('UPDATE links SET ? WHERE ID = ?', [newLink, id]);
+    req.flash('success', 'Enlace actualizado exitosamente');
     res.redirect('/links');
 });
 

@@ -2,6 +2,12 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const flash = require('connect-flash');
+const session = require('express-session');
+const mySqlStore = require('express-mysql-session');
+const { database } = require('./keys');
+const MySQLStore = require('express-mysql-session');
+const passport = require('passport');
 
 // Inicializaciones
 const app = express();
@@ -21,12 +27,21 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // Middlewares
+app.use(session({
+    secret: 'nodejsmysqlcourse',
+    resave: false,
+    saveUninitialized: false,
+    store: new MySQLStore(database)
+}));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(flash());
+app.use(passport.initialize());
 
 // Variables globales
 app.use((req, res, next) => {
+    app.locals.serverMessages = req.flash();
     next(); 
 });
 
