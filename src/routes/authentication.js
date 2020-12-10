@@ -8,7 +8,24 @@ router.get('/signup', (req, res) => {
 });
 
 router.get('/profile', (req, res) => {
-    res.send('Profile');
+    res.render('auth/profile');
+});
+
+router.get('/login', (req, res) => {
+    res.render('auth/login');
+});
+
+router.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/login');
+});
+
+router.post('/signin', (req, res, next) => {
+    passport.authenticate('local.signin', {
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next);
 });
 
 // Forma larga de hacer la autenticación
