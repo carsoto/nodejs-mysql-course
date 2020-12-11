@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-
 const passport = require('passport');
+const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 
-router.get('/signup', (req, res) => {
+router.get('/signup', isNotLoggedIn, (req, res) => {
     res.render('auth/signup');
 });
 
-router.get('/profile', (req, res) => {
+router.get('/profile', isLoggedIn, (req, res) => {
     res.render('auth/profile');
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', isNotLoggedIn, (req, res) => {
     res.render('auth/login');
 });
 
@@ -28,17 +28,6 @@ router.post('/signin', (req, res, next) => {
     })(req, res, next);
 });
 
-// Forma larga de hacer la autenticación
-/*router.post('/signup', (req, res) => {
-    //console.log(req.body);
-    passport.authenticate('local.signup', {
-        successRedirect: '/profile',
-        failureRedirect: '/signup',
-        failureFlash: true
-    });
-});*/
-
-// Forma corta de hacer la autenticación
 router.post('/signup', passport.authenticate('local.signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',

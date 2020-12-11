@@ -17,13 +17,18 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    {{> navigation }}
+    <div class="d-flex flex-column min-vh-100">
+        {{> navigation }}
 
-    {{> messages }}
+        {{> messages }}
 
-    {{{ body }}}
-
-    {{> footer }}
+        <main class="flex-fill">
+            {{{ body }}}
+        </main>
+        
+        {{> footer }}    
+    </div>
+    
 
     {{!-- Scripts --}}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -1,29 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">FAVORITE LINKS</a>
+    <a class="navbar-brand" href="/">FAVORITE LINKS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      {{#if user }}
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown active">
-                <a class="nav-link dropdown-toggle" href="/links" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ user.fullname }} <span class="sr-only">(current)</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/links">Listado de enlaces</a>
-                    <a class="dropdown-item" href="/links/add">Crear enlace</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/profile">Perfil</a>
-                    <a class="dropdown-item" href="/logout">Cerrar sesión</a>
-                </div>
-                </div>
-                
-            </li>
-        </ul>
-      {{/if}}
+      <ul class="navbar-nav ml-auto">
+        {{#if user }}
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="/links" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ user.fullname }} <span class="sr-only">(current)</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/links">Listado de enlaces</a>
+              <a class="dropdown-item" href="/links/add">Crear enlace</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/profile">Perfil</a>
+              <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+            </div>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Registrarse</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Iniciar sesión</a>
+          </li>
+        {{/if}}
+      </ul>
     </div>
   </div>
 </nav>
+

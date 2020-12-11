@@ -4,7 +4,8 @@ const router = express.Router();
 const db = require('../database');
 
 router.get('/', async (req, res) => {
-    const links = await db.query('SELECT * FROM links');
+    const user_id = req.user.id;
+    const links = await db.query('SELECT * FROM links WHERE user_id = ?', [user_id]);
     res.render('links/list', { links });
 });
 
@@ -14,9 +15,10 @@ router.get('/add', (req, res) => {
 
 router.post('/add', async (req, res) => {
     const { title, url, description } = req.body;
+    const user_id = req.user.id;
 
     const newLink = {
-        title, url, description
+        title, url, description, user_id
     };
 
     await db.query('INSERT INTO links SET ?', [newLink]);
